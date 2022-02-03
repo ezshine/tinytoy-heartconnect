@@ -1,0 +1,41 @@
+{
+  "name": "heartconnect",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "buildmac": "rm -rf ../dist/mac && electron-builder --mac",
+    "buildwin": "rm -rf ../dist/win && electron-builder --win",
+    "buildlinux": "rm -rf ../dist/linux && electron-builder --linux"
+  },
+  "repository": {
+    "url": "https://github.com/ezshine/tinytoy-heartconnect"
+  },
+  "author": "大帅老猿",
+  "license": "MIT",
+  "build": {
+    "electronDownload":{
+      "mirror":"https://npm.taobao.org/mirrors/electron/"
+    },
+    "appId": "com.ezshine.heartconnect",
+    "productName": "心有灵犀",
+    "directories": {
+      "output": "../dist/${os}"
+    },
+    "asar": false,
+    "mac": {
+      "target": "dmg",
+      "icon": "icon.icns"
+    },
+    "win": {
+      "icon": "icon.ico"
+    },
+    "linux": {
+      "icon": "icon.ico"
+    }
+  },
+  "devDependencies": {
+    "electron": "^16.0.5",
+    "electron-builder": "^22.14.5"
+  }
+}

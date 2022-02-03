@@ -1,0 +1,65 @@
+@keyframes beat {
+    0% {transform: scale(1)}
+    50% {transform: scale(1.1)}
+    100% {transform: scale(1)}
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body,html{
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding:0;
+}
+
+
+#chest {
+    position:relative;
+    width:100vw;
+    height:100vw;
+    margin:0 auto;
+    animation-name: beat;
+    animation-duration: 0.7s;
+    animation-delay: 0s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-play-state:paused;
+}
+.heart {
+    position:absolute;
+    z-index:2;
+    background: linear-gradient(-90deg, #F50A45 0%,#d5093c 40%);
+    transform:  rotate(225deg);
+    box-shadow:0 0 20px #d5093c;
+}
+.heart.center {
+    background: linear-gradient(-45deg, #B80734 0%,#d5093c 40%);
+}
+.heart.top {
+    z-index:3;
+}
+.side {
+    top:20%;
+    width:44%;
+    height:44%;
+    border-radius: 50%;
+}
+.center {
+    width:42%;
+    height:42%;
+    top:38%;
+    left:50%;
+    margin-left: -21%;
+    font-size:0;
+}
+.left {
+    left:12.4%;
+}
+.right {
+    right:12.4%;
+}

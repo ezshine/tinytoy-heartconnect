@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./jquery.min.js"></script>
+  <script src="https://unpkg.com/@croquet/croquet"></script>
+  <script>
+    var udid = Date.now().toString(36);
+    var lastclick=0;
+    class HeartModel extends Croquet.Model {
+      init() {
+          this.subscribe("heart","click",this.click)
+      }
+
+      click(from){
+          this.publish("heart", "beat",from);
+      }
+    }
+
+      class MyView extends Croquet.View {
+
+      constructor(model) {
+          super(model);
+          this.model = model;
+          chest.onclick = (event) => {
+            lastclick = Date.now();
+            this.publish("heart","click",udid);
+          };
+          this.subscribe("heart", "beat", this.beat);
+      }
+
+      beat(from) {
+        if(from!=udid){
+          console.log("本次心跳来自于别人");
+          if(Date.now()-lastclick<1500){
+            //有效回应
+            console.log("这是一次有效回应");
+            playSound("light.mp3");
+          }
+        }else{
+          console.log("本次心跳来自于自己");
+        }
+        heartBeat();
+      }
+    }
+
+    function playSound(src){
+      var snd = new Audio();
+      snd.src = src;
+      snd.volume = 0.1;
+      snd.play();
+    }
+
+    function heartBeat(){
+      if(window['timer'])return;
+      playSound("click.mp3");
+      $("#chest").css("animation-play-state","running");
+      window['timer']=setTimeout(()=>{
+        $("#chest").css("animation-play-state","paused");
+        clearTimeout(timer);
+        window['timer']=null;
+      },700)
+    }
+    $(document).ready(()=>{
+      HeartModel.register("HeartModel");
+      Croquet.Session.join({
+          appId: "com.ezshine.heartconnect",
+          apiKey: "1DL0ohEPLo1hpb1umfPgOb8MkxCikPeCIHniB30k7",
+          name: "unnamed",
+          password: "secret",
+          model: HeartModel,
+          view:MyView
+        });
+
+      $("#chest").css("animation-play-state","paused");
+
+      $("#reloadButton").click(()=>{
+        $("#chest").remove();
+        window.location.reload();
+      });
+    });
+  </script>
+</head>
+<body style="-webkit-app-region:drag;">
+  <div id="chest">
+    <div class="heart left side top"></div>
+    <div class="heart center">&hearts;</div>
+    <div class="heart right side"></div>
+  </div>
+  <div id='reloadButton' style="cursor: pointer;position: absolute;z-index: 9999;width: 40px;height: 40px;background: rgba(0,0,0,.3);right:10px;bottom: 10px;padding:6px;border-radius: 50%;">
+    <img src="./reset.png" style="width: 100%;height: 100%;"/>
+  </div>
+</body>
+</html>
