@@ -13,4 +13,16 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: windows
-        path: dist
+        path: dist/*exe
+  buildmac:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install and Build
+      run:
+        cd src && npm install && npm run buildwin
+    - name: Upload File
+      uses: actions/upload-artifact@v2
+      with:
+        name: mac
+        path: dist/*dmg
