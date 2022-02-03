@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buildmac": "rm -rf ../dist && electron-builder --mac",
-    "buildwin": "rm -rf ../dist && electron-builder --win",
-    "buildlinux": "rm -rf ../dist && electron-builder --linux"
+    "buildmac": "rm -rf ../dist && electron-builder --mac --publish never",
+    "buildwin": "rm -rf ../dist && electron-builder --win --publish never",
+    "buildlinux": "rm -rf ../dist && electron-builder --linux --publish never"
   },
   "repository": {
     "url": "https://github.com/ezshine/tinytoy-heartconnect"
