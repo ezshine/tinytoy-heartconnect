@@ -1,0 +1,20 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+jobs:
+  buildwin:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install and Build
+      run:
+        cd src
+        npm install
+        npm run buildwin
+    - name: Upload File
+      uses: actions/upload-artifact@v2
+      with:
+        name: windows
+        path: dist
