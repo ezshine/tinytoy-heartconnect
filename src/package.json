@@ -14,9 +14,6 @@
   "author": "大帅老猿",
   "license": "MIT",
   "build": {
-    "electronDownload":{
-      "mirror":"https://npm.taobao.org/mirrors/electron/"
-    },
     "appId": "com.ezshine.heartconnect",
     "productName": "heartconnect",
     "directories": {
