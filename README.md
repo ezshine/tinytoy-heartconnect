@@ -1,6 +1,6 @@
 # tinytoy-heartconnect
 
-![](./hearticon.png)
+![](./icon.png)
 
 这是情侣之间互相安装的一个小软件，是一颗跳动的心。如果情侣中的某人点击这颗心，则两个人的心都会跳动。
 
