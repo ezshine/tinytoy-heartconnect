@@ -1,6 +1,6 @@
 # tinytoy-heartconnect
 
-![image](https://github.com/ezshine/tinytoy-heartconnect/blob/main/icon.png)
+![icon.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b7ad006c54b94340999a3628d990e325~tplv-k3u1fbpfcp-watermark.image?)
 
 这是情侣之间互相安装的一个小软件，是一颗跳动的心。如果情侣中的某人点击这颗心，则两个人的心都会跳动。
 
