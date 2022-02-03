@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buildmac": "rm -rf ../dist/mac && electron-builder --mac",
-    "buildwin": "rm -rf ../dist/win && electron-builder --win",
-    "buildlinux": "rm -rf ../dist/linux && electron-builder --linux"
+    "buildmac": "rm -rf ../dist && electron-builder --mac",
+    "buildwin": "rm -rf ../dist && electron-builder --win",
+    "buildlinux": "rm -rf ../dist && electron-builder --linux"
   },
   "repository": {
     "url": "https://github.com/ezshine/tinytoy-heartconnect"
@@ -18,9 +18,9 @@
       "mirror":"https://npm.taobao.org/mirrors/electron/"
     },
     "appId": "com.ezshine.heartconnect",
-    "productName": "心有灵犀",
+    "productName": "heartconnect",
     "directories": {
-      "output": "../dist/${os}"
+      "output": "../dist"
     },
     "asar": false,
     "mac": {
