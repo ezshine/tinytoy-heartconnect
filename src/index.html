@@ -8,8 +8,12 @@
   <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
   <script src="https://unpkg.com/@croquet/croquet"></script>
   <script>
-    const fs = require("fs");
-    const appid = fs.readFileSync(__dirname+"/channel.txt","utf-8").trim();
+    var fs = require('fs'),appid='defaultchannel';
+    try{
+      appid = fs.readFileSync(__dirname+"/channel.txt","utf-8").trim();
+    }catch(err){
+      console.log(err);
+    }
 
     var udid = Date.now().toString(36);
     var lastclick=0;
@@ -53,7 +57,7 @@
     function playSound(src){
       var snd = new Audio();
       snd.src = src;
-      snd.volume = 0.3;
+      snd.volume = 0.5;
       snd.play();
     }
 
@@ -68,6 +72,21 @@
       },700)
     }
     $(document).ready(()=>{
+      $("#idInput").val(appid);
+      $("#saveidButton").click(()=>{
+        $("#settingPanel").hide();
+        try{
+          fs.writeFileSync(__dirname+"/channel.txt",$("#idInput").val().trim());
+          window.location.reload();
+        }catch(err){
+          console.log(err);
+        }
+      });
+
+      $("#settingButton").click(()=>{
+        $("#settingPanel").show();
+      });
+
       HeartModel.register("HeartModel");
       Croquet.Session.join({
           appId: "com.ezshine.heartconnect."+appid,
@@ -93,8 +112,20 @@
     <div class="heart center">&hearts;</div>
     <div class="heart right side"></div>
   </div>
-  <div id='reloadButton' style="cursor: pointer;position: absolute;z-index: 9999;width: 30px;height: 30px;background: rgba(0,0,0,.3);right:10px;bottom: 10px;padding:6px;border-radius: 50%;">
-    <img src="./reset.png" style="width: 100%;height: 100%;"/>
+  <div id='settingPanel' style="display: none;width: 100%;height:100%;position: absolute;z-index: 99999;background: rgba(0,0,0,.7);top:0;left:0;">
+    <div style="width: 80%;height: 80px;position: absolute;left:50%;top:50%;transform: translate(-50%,-50%);">
+      <div style="width: 100%;text-align: center;color: #fff;margin-bottom: 10px;">交流通道标识ID</div>
+      <div style="width: 100%;margin-bottom: 10px;">
+        <input id='idInput' placeholder="仅限英文字母" type="text" style="outline: none;width: 100%;height: 40px;text-align: center;line-height: 40px;font-size: 20px;"/>
+      </div>
+      <div id='saveidButton' style="cursor: pointer;background: #ff3366;border-radius: 15px;width: 100px;text-align: center;height: 30px;line-height: 30px;color: #fff;margin: 0 auto;">保存</div>
+    </div>
+  </div>
+  <div style="position: absolute;z-index: 9999;top: 10px;right:10px;">
+    <div style="cursor: pointer;width: 30px;height: 30px;background: rgba(0,0,0,.3);padding:6px;border-radius: 50%;-webkit-app-region:drag;"><img src="./move.png" draggable="false" style="width: 100%;height: 100%;"/></div>
+  </div>
+  <div style="position: absolute;z-index: 9999;bottom: 10px;right: 10px;">
+    <div id='settingButton' style="cursor: pointer;width: 30px;height: 30px;background: rgba(0,0,0,.3);padding:6px;border-radius: 50%;"><img src="./setting.png" draggable="false" style="width: 100%;height: 100%;"/></div>
   </div>
 </body>
 </html>
