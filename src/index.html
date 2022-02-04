@@ -9,7 +9,7 @@
   <script src="https://unpkg.com/@croquet/croquet"></script>
   <script>
     const fs = require("fs");
-    const appid = fs.readFileSync("channel.txt","utf-8").trim();
+    const appid = fs.readFileSync(__driname+"/channel.txt","utf-8").trim();
 
     var udid = Date.now().toString(36);
     var lastclick=0;
@@ -87,7 +87,7 @@
     });
   </script>
 </head>
-<body style="-webkit-app-region:drag;">
+<body>
   <div id="chest">
     <div class="heart left side top"></div>
     <div class="heart center">&hearts;</div>
