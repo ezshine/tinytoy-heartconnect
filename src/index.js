@@ -19,7 +19,6 @@ app.on('ready', function(){
 		focusable: true,
 		resizable:false,
 		hasShadow: false,
-		skipTaskbar: true,
 		show:true,
 		alwaysOnTop: true,
 		webPreferences:{
@@ -27,7 +26,7 @@ app.on('ready', function(){
 			contextIsolation:false
 		}
 	});
-	mainWindow.webContents.openDevTools({mode:'detach',activate:true})
+	// mainWindow.webContents.openDevTools({mode:'detach',activate:true})
 	mainWindow.loadFile('index.html');
 })
 app.on('window-all-closed', function() {
