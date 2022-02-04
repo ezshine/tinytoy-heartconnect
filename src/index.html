@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="./style.css">
+  
   <script src="./jquery.min.js"></script>
+  <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
   <script src="https://unpkg.com/@croquet/croquet"></script>
   <script>
+    const fs = require("fs");
+    const appid = fs.readFileSync("channel.txt","utf-8").trim();
+
     var udid = Date.now().toString(36);
     var lastclick=0;
     class HeartModel extends Croquet.Model {
@@ -36,7 +41,7 @@
           if(Date.now()-lastclick<1500){
             //有效回应
             console.log("这是一次有效回应");
-            playSound("light.mp3");
+            playSound("combo.mp3");
           }
         }else{
           console.log("本次心跳来自于自己");
@@ -48,7 +53,7 @@
     function playSound(src){
       var snd = new Audio();
       snd.src = src;
-      snd.volume = 0.1;
+      snd.volume = 0.3;
       snd.play();
     }
 
@@ -65,8 +70,8 @@
     $(document).ready(()=>{
       HeartModel.register("HeartModel");
       Croquet.Session.join({
-          appId: "com.ezshine.heartconnect",
-          apiKey: "1DL0ohEPLo1hpb1umfPgOb8MkxCikPeCIHniB30k7",
+          appId: "com.ezshine.heartconnect."+appid,
+          apiKey: "1DjcJMt82Cs13b5IqLfBdC5PHh6i3LqdM4KafOusx",
           name: "unnamed",
           password: "secret",
           model: HeartModel,
@@ -88,7 +93,7 @@
     <div class="heart center">&hearts;</div>
     <div class="heart right side"></div>
   </div>
-  <div id='reloadButton' style="cursor: pointer;position: absolute;z-index: 9999;width: 40px;height: 40px;background: rgba(0,0,0,.3);right:10px;bottom: 10px;padding:6px;border-radius: 50%;">
+  <div id='reloadButton' style="cursor: pointer;position: absolute;z-index: 9999;width: 30px;height: 30px;background: rgba(0,0,0,.3);right:10px;bottom: 10px;padding:6px;border-radius: 50%;">
     <img src="./reset.png" style="width: 100%;height: 100%;"/>
   </div>
 </body>

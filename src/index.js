@@ -5,27 +5,29 @@ const {
 } = require('electron')
 
 app.on('ready', function(){
-	const {
-		swidth,
-		sheight
-	} = screen.getPrimaryDisplay().workAreaSize
+	var screensize = screen.getPrimaryDisplay().workAreaSize;
 
 	const size = 200;
 
 	var mainWindow = new BrowserWindow({
-		x:swidth-size,
-    	y:sheight-size,
+		x:screensize.width-size,
+    	y:screensize.height-size,
 		width: size,
 		height: size,
 		frame: false,
 		transparent: true,
 		focusable: false,
 		resizable:false,
-		hasShadow: true,
+		hasShadow: false,
 		skipTaskbar: true,
 		show:true,
 		alwaysOnTop: true,
+		webPreferences:{
+			nodeIntegration:true,
+			contextIsolation:false
+		}
 	});
+	// mainWindow.webContents.openDevTools({mode:'detach',activate:true})
 	mainWindow.loadFile('index.html');
 })
 app.on('window-all-closed', function() {
